@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wanma.charge.dao.common">
+    <sql id="paged">
+        <trim prefix="order by">
+            <foreach item="item" index="index" collection="page.orderConditions" separator=",">
+                ${item.column} ${item.orderBy}
+            </foreach>
+        </trim>
+        limit #{page.pageStart}, #{page.pageSize}
+    </sql>
+
+    <sql id="orderBy">
+        <trim prefix="order by">
+            <foreach item="item" index="index" collection="orderConditions" separator=",">
+                ${item.column} ${item.orderBy}
+            </foreach>
+        </trim>
+    </sql>
+</mapper>

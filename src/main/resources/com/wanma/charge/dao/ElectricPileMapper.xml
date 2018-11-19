@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanma.charge.dao.ElectricPileMapper">
+
+    <resultMap id="resultElectricPile" type="com.wanma.charge.domain.ElectricPile">
+        <id column="pk_ElectricPile" property="id"/>
+        <result column="elPi_ElectricPileName" property="name"/>
+        <result column="elPi_ElectricPileCode" property="code"/>
+        <result column="ep_num" property="num"/>
+        <result column="elPi_PowerSize" property="power"/>
+        <result column="elPi_ChargingMode" property="chargingMethod"/>
+        <result column="elPi_State" property="status"/>
+        <result column="elPi_Type" property="typeId"/>
+        <result column="owner_ship" property="ownerShip"/>
+        <result column="elPi_Maker" property="pileMakerId"/>
+        <result column="elpi_TypeSpanId" property="productModelId"/>
+        <result column="cpy_id" property="companyId"/>
+        <result column="company_number" property="companyNumber"/>
+        <result column="elPi_RateInformationId" property="rateInformationId"/>
+        <result column="elPi_OwnProvinceCode" property="provinceCode"/>
+        <result column="elPi_OwnCityCode" property="cityCode"/>
+        <result column="elPi_OwnCountyCode" property="areaCode"/>
+        <result column="elPi_ElectricPileAddress" property="address"/>
+        <result column="elPi_Longitude" property="longitude"/>
+        <result column="elPi_Latitude" property="latitude"/>
+        <result column="elPi_PowerNumber" property="muzzleNumber"/>
+        <result column="elPi_PowerInterfaceName" property="interfaceStandard"/>
+        <result column="sim_name" property="simName"/>
+        <result column="sim_mac" property="simMac"/>
+        <result column="elPi_OutputVoltage" property="maxVoltage"/>
+        <result column="elPi_OutputCurrent" property="maxElectricity"/>
+        <result column="elPi_Remark" property="remark"/>
+        <result column="pk_concentratorID" property="concentratorId"/>
+        <result column="elPi_RelevancePowerStation" property="powerStationId"/>
+        <result column="delete_flag" property="isDel"/>
+        <result column="elPi_Createdate" property="gmtCreate"/>
+        <result column="elPi_Updatedate" property="gmtModified"/>
+        <result column="comm_status" property="commStatus"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        pk_ElectricPile, elPi_ElectricPileName, elPi_ElectricPileCode, elPi_ElectricPileAddress,
+        elPi_Longitude, elPi_Latitude, elPi_PowerNumber, elPi_State, elPi_Type, elPi_ChargingMode, elPi_PowerSize,
+        elPi_Maker, elPi_OutputVoltage, elPi_OutputCurrent, elPi_Createdate, elPi_Updatedate, elPi_Remark,
+        elPi_PowerInterfaceName, elPi_RateInformationId, ep_num, elPi_OwnProvinceCode, elPi_OwnCityCode,
+        elPi_OwnCountyCode, delete_flag, sim_mac, sim_name, pk_concentratorID, cpy_id, company_number, elpi_TypeSpanId,
+        owner_ship, elPi_RelevancePowerStation,comm_status
+    </sql>
+
+    <select id="selectSimpleByCode" parameterType="String" resultMap="resultElectricPile">
+        select
+        pk_ElectricPile,
+        elPi_OwnCityCode,
+        elPi_RelevancePowerStation
+        from tbl_electricpile
+        where 1=1
+        AND elPi_State = 1
+        AND delete_flag = 0
+        and elPi_ElectricPileCode = #{epCode}
+    </select>
+</mapper>
